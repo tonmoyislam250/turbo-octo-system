@@ -9,9 +9,9 @@ RUN wget https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1
     && echo $LOGNAME && echo $DEBFULLNAME \
     && dh_make -s -y --copyright=gpl3 --createorig && ls -a \
     && dpkg-buildpackage && ls -a && ls -a ../
-RUN cd ../ && tar -czf package.tar.gz package
+#RUN cd ../ && tar -czf package.tar.gz package
 RUN mkdir /.config && mkdir /.config/rclone && mkdir /root/.config \
     && mkdir /root/.config/rclone
 RUN curl -L https://gist.githubusercontent.com/tonmoyislam250/51987f3eac6963992a8d09debaf9d4d8/raw/ea7a0a0895e1060f8224e4e8950cca064acf25f1/gistfile1.txt >/.config/rclone/rclone.conf
 RUN cp /.config/rclone/rclone.conf /root/.config/rclone/
-RUN rclone copy /home/package.tar.gz teamdrive:qbit/Sharedlib/
+RUN rclone copy /home/package/aria2_1.36.0-1_amd64.deb teamdrive:qbit/Sharedlib/
