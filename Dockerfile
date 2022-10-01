@@ -6,4 +6,5 @@ RUN chmod 777 /home/package
 RUN wget https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0.tar.gz && tar -xf aria2-1.36.0.tar.gz \
     && cd aria2-1.36.0 && export DEBEMAIL="tiktikimelbo7@gmail.com" && export DEBFULLNAME="Tonmoy Islam" && export LOGNAME="Tonmoy" \
     && echo $LOGNAME && echo $DEBFULLNAME \
-    && dh_make -s -y --createorig && ls -a
+    && dh_make -s -y --copyright=gpl3 --createorig && ls -a \
+    && dpkg-buildpackage && ls -a && ls -a ../
