@@ -1,7 +1,8 @@
 FROM debian:latest
-ENV USER build
 ARG UID
 USER root
+ARG DEBIAN_FRONTEND=noninteractive
+ENV USER build
 RUN apt update -y && apt install -y --no-install-recommends \
 	sbuild schroot debootstrap reprepro eatmydata gnupg ccache \
 	locales ca-certificates cron sudo git bash \
