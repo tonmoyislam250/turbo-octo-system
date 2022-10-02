@@ -6,7 +6,7 @@ RUN apt update -y && apt install -y --no-install-recommends \
 	sbuild schroot debootstrap reprepro eatmydata gnupg ccache \
 	locales ca-certificates cron sudo git bash \
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen \
-    && useradd -d /home/$USER -U -m -s /bin/bash -u $UID $USER
+    && useradd -d /home/$USER -U -m -s /bin/bash -u $UID $USER \
     && echo "build:sbuild" | chpasswd && echo "root:sbuild" | chpasswd \
     && echo "%build  ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/sbuildgrp \
     && chmod 0440 /etc/sudoers.d/sbuildgrp && sbuild-adduser build
