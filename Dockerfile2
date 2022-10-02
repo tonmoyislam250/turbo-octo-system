@@ -5,14 +5,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV USER build
 RUN apt update -y && apt install -y --no-install-recommends \
 	sbuild schroot debootstrap reprepro eatmydata gnupg ccache \
-	locales ca-certificates cron sudo git bash \
-    && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen \
-    && useradd -d /home/$USER -U -m -s /bin/bash -u $UID $USER \
-    && echo "build:sbuild" | chpasswd && echo "root:sbuild" | chpasswd \
-    && echo "%build  ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/sbuildgrp \
-    && chmod 0440 /etc/sudoers.d/sbuildgrp && sbuild-adduser build
+	locales ca-certificates cron sudo git bash
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
+RUN useradd -d /home/$USER -U -m -s /bin/bash -u $UID $USER
+RUN echo "build:sbuild" | chpasswd && echo "root:sbuild" | chpasswd
+RUM echo "%build  ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/sbuildgrp
+RUN chmod 0440 /etc/sudoers.d/sbuildgrp && sbuild-adduser build
 USER $USER
-
-RUN mkdir -p /home/$USER/sbuild-setup \
-    && sudo -E sbuild-createchroot --include=eatmydata,ccache,gnupg unstable /home/$USER/chroot-sbuild http://deb.debian.org/debian \
-    && sbuild-update -ud unstable
+RUN mkdir -p /home/$USER/sbuild-setup 
+RUN sudo -E sbuild-createchroot --include=eatmydata,ccache,gnupg unstable /home/$USER/chroot-sbuild http://deb.debian.org/debian \
+RUN sbuild-update -ud unstable
