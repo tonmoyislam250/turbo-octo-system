@@ -28,6 +28,7 @@ RUN ccache --max-size 4G
 RUN mkdir -p /etc/schroot/sbuild/
 RUN echo $CCACHE_DIR $CCACHE_DIR none rw,bind 0 0 >> /etc/schroot/sbuild/fstab
 ADD ./sbuild-setup $CCACHE_DIR/
+RUN sbuild-update --keygen
 
 USER $USER
 
