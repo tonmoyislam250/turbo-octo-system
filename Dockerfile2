@@ -13,4 +13,4 @@ RUN chmod 0440 /etc/sudoers.d/sbuildgrp && sbuild-adduser build
 USER $USER
 RUN mkdir -p /home/$USER/sbuild-setup 
 RUN sudo -E sbuild-createchroot --include=eatmydata,ccache,gnupg unstable /home/$USER/chroot-sbuild http://deb.debian.org/debian
-RUN sbuild-update -ud unstable
+RUN sudo sbuild-update -ud unstable
