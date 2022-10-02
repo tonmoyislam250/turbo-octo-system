@@ -1,6 +1,5 @@
 FROM debian:buster
-ARG UID
-
+ENV UID 1000
 USER root
 
 ARG DEBIAN_FRONTEND=noninteractive
