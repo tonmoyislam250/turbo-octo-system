@@ -1,0 +1,5 @@
+FROM debian:latest
+RUN apt update -y && apt install -y sbuild schroot \
+    && mkdir -p /var/lib/sbuild/chroots && chown sbuild:sbuild /var/lib/sbuild/chroots
+RUN sbuild-createchroot unstable /var/lib/sbuild/chroots/unstable-amd64 \
+  --alias=sid --alias=UNRELEASED http://deb.debian.org/debian && sbuild-update -ud unstable
